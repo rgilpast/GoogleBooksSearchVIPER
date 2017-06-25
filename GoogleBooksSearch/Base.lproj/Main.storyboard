@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2yP-LR-4aq">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="YtD-Ad-kPD">
+            <objects>
+                <navigationController id="2yP-LR-4aq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yqJ-1H-wbU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BDu-jt-F9I" kind="relationship" relationship="rootViewController" id="aVQ-ZX-jR2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9pM-c0-MJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-889" y="64"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="WT5-Sz-CBF">
+            <objects>
+                <viewController id="BDu-jt-F9I" customClass="BooksListViewController" customModule="GoogleBooksSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EEO-cA-Gg4"/>
+                        <viewControllerLayoutGuide type="bottom" id="NXc-eT-ctX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="opY-Wd-EZW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="egk-f3-HqS">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7o5-jU-Y4H"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Qf-Uy-PfB">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="egk-f3-HqS" firstAttribute="leading" secondItem="opY-Wd-EZW" secondAttribute="leading" id="9cX-Vk-AfJ"/>
+                            <constraint firstAttribute="trailing" secondItem="6Qf-Uy-PfB" secondAttribute="trailing" id="CrP-fv-ypZ"/>
+                            <constraint firstItem="NXc-eT-ctX" firstAttribute="top" secondItem="6Qf-Uy-PfB" secondAttribute="bottom" id="Lms-5B-yOT"/>
+                            <constraint firstItem="6Qf-Uy-PfB" firstAttribute="leading" secondItem="opY-Wd-EZW" secondAttribute="leading" id="ROS-Yh-xjQ"/>
+                            <constraint firstItem="egk-f3-HqS" firstAttribute="top" secondItem="EEO-cA-Gg4" secondAttribute="bottom" id="U1n-s5-WGS"/>
+                            <constraint firstAttribute="trailing" secondItem="egk-f3-HqS" secondAttribute="trailing" id="bhx-ng-FVS"/>
+                            <constraint firstItem="6Qf-Uy-PfB" firstAttribute="top" secondItem="egk-f3-HqS" secondAttribute="bottom" id="pAL-6f-Jlv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Search" id="qy9-wI-cQO"/>
+                    <connections>
+                        <outlet property="searchBar" destination="egk-f3-HqS" id="5Pa-Dh-kdi"/>
+                        <outlet property="tableView" destination="6Qf-Uy-PfB" id="F0D-tl-gFO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1te-dF-R9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-143.19999999999999" y="62.518740629685162"/>
+        </scene>
+    </scenes>
+</document>
