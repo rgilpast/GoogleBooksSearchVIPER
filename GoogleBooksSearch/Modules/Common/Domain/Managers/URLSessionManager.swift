@@ -15,16 +15,7 @@ public class URLSessionManager: NetworkingManagerProtocol {
     fileprivate init(withBaseURL url: URL) {
         baseURL = url
     }
-    
-    fileprivate func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-        
-        print("Get data from: \(url.absoluteString)")
-        URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            completion(data, response, error)
-            }.resume()
-    }
-    
+
     public static func createManager(forBaseURL url: URL) -> NetworkingManagerProtocol {
         
         let manager = URLSessionManager(withBaseURL: url)
@@ -36,5 +27,14 @@ public class URLSessionManager: NetworkingManagerProtocol {
         if let urlRequest: URL = URL(string: baseURL.absoluteString + "/\(resource)") {
             getDataFromUrl(url: urlRequest, completion: completion)
         }
+    }
+    
+    public func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        
+        print("Get data from: \(url.absoluteString)")
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
     }
 }

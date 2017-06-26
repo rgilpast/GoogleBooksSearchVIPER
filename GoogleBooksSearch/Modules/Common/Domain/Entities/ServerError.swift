@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias OnFailureResponseType = (Error?) -> (Void)
+
 public enum ServerErrorCode: Int {
     case Undefined = -1
     case NoData = -2

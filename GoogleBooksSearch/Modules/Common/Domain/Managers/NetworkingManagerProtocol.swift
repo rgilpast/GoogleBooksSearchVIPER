@@ -13,5 +13,6 @@ public protocol NetworkingManagerProtocol {
 
     static func createManager(forBaseURL url: URL) -> NetworkingManagerProtocol
     func getDataFromResource(resource: String, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void)
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void)
     
 }
