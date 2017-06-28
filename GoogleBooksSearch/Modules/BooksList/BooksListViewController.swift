@@ -20,6 +20,7 @@ public typealias BooksListsUIProtocol = BooksListsViewProtocol & TableLoadingInd
 
 public struct BookViewEntity
 {
+    let id: String!
     let title: String!
     let authors: String!
     let urlBookImage : String?
@@ -32,11 +33,11 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     
     var mBooks: [BookViewEntity] = []
     
-    lazy var presenter: BooksListPresenter = { [unowned self] in
+    public lazy var presenter: BooksListPresenter = { [unowned self] in
         return BooksListPresenter(withUI: self)
     }()
     
-    lazy public var loadingIndicator: UIRefreshControl = { [unowned self] in
+    public lazy var loadingIndicator: UIRefreshControl = { [unowned self] in
         // Initialize the refresh control.
         let control = UIRefreshControl(frame: .zero)
         control.backgroundColor = UIColor.purple
@@ -52,8 +53,12 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
         tableView?.refreshControl = loadingIndicator
         tableView?.delegate = self
         tableView?.dataSource = self
-        tableView?.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 44.0
         tableView?.register(BookCell.classForCoder(), forCellReuseIdentifier: BookCell.identifier)
+        tableView?.separatorStyle = .none
+        
+        searchBar.delegate = self
         
         //call to presenter to give a chance when view did load
         presenter.viewDidLoad()
@@ -73,8 +78,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
 
     public func refreshBooks()
     {
-        //TODO: get search criteria from Search Control
-        self.presenter.askForBooks(filter: "")
+        presenter.askForBooks(filter: searchBar.text ?? "")
     }
     
     public func showEmptyMessage()
@@ -90,7 +94,6 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
         messageLabel.sizeToFit()
         tableView?.backgroundView = messageLabel;
         tableView?.separatorStyle = .none;
-        
     }
 }
 
@@ -131,4 +134,12 @@ extension BooksListViewController: UITableViewDelegate {
     }
 }
 
+extension BooksListViewController: UISearchBarDelegate {
+    
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
+        presenter.askForBooks(filter: searchBar.text ?? "")
+    }
+}
 

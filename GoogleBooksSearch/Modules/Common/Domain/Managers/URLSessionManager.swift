@@ -25,6 +25,7 @@ public class URLSessionManager: NetworkingManagerProtocol {
     public func getDataFromResource(resource: String, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         
         if let urlRequest: URL = URL(string: baseURL.absoluteString + "/\(resource)") {
+            
             getDataFromUrl(url: urlRequest, completion: completion)
         }
     }

@@ -15,6 +15,7 @@ public protocol BooksListInteractorProtocol {
     
     var repository: BooksListRepositoryProtocol? { get set }
     func searchBooks(filter: String, onSuccess: OnBooksListResponseType?, onFailure: OnFailureResponseType? )
+    func getImageBook(uriImage: String?, onSuccess: OnImageDataBookResponseType?, onFailure: OnFailureResponseType?)
 }
 
 public class BooksListInteractor: BooksListInteractorProtocol {
@@ -27,4 +28,13 @@ public class BooksListInteractor: BooksListInteractorProtocol {
         repository?.searchBooks(filter: filter, onSuccess: onSuccess, onFailure: onFailure)
     }
     
+    //get the image´s  book from a its url
+    public func getImageBook(uriImage: String?, onSuccess: OnImageDataBookResponseType?, onFailure: OnFailureResponseType?) {
+        
+        guard let uri = uriImage  else {
+            onSuccess?(nil)
+            return
+        }
+        repository?.getImageBook(uriImage: uri, onSuccess: onSuccess, onFailure: onFailure)
+    }
 }

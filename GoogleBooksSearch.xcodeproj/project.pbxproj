@@ -25,6 +25,9 @@
 		05F56B271E6C1F300078C532 /* BooksListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F56B261E6C1F300078C532 /* BooksListPresenter.swift */; };
 		05F56B2C1E6C250C0078C532 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F56B2B1E6C250C0078C532 /* BookCell.swift */; };
 		05F56B311E6C389A0078C532 /* BookEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F56B301E6C389A0078C532 /* BookEntity.swift */; };
+		0C0091C41F028CED00FC9DA3 /* BooksListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0091C31F028CED00FC9DA3 /* BooksListDataSource.swift */; };
+		0C0091C61F02A20400FC9DA3 /* DataMemoryCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0091C51F02A20400FC9DA3 /* DataMemoryCacheManager.swift */; };
+		0C0091CA1F02B64900FC9DA3 /* DataCacheManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0091C91F02B64800FC9DA3 /* DataCacheManagerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +52,9 @@
 		05F56B261E6C1F300078C532 /* BooksListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksListPresenter.swift; sourceTree = "<group>"; };
 		05F56B2B1E6C250C0078C532 /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		05F56B301E6C389A0078C532 /* BookEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookEntity.swift; sourceTree = "<group>"; };
+		0C0091C31F028CED00FC9DA3 /* BooksListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksListDataSource.swift; sourceTree = "<group>"; };
+		0C0091C51F02A20400FC9DA3 /* DataMemoryCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMemoryCacheManager.swift; sourceTree = "<group>"; };
+		0C0091C91F02B64800FC9DA3 /* DataCacheManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCacheManagerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,8 @@
 			children = (
 				05E1FAA01EF8548E00E95898 /* NetworkingManagerProtocol.swift */,
 				05E1FAA21EF854F000E95898 /* URLSessionManager.swift */,
+				0C0091C51F02A20400FC9DA3 /* DataMemoryCacheManager.swift */,
+				0C0091C91F02B64800FC9DA3 /* DataCacheManagerProtocol.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -115,6 +123,7 @@
 				05F56B2F1E6C387B0078C532 /* Entities */,
 				05E1FAA51EF8555B00E95898 /* BooksListInteractor.swift */,
 				05E1FAA81EF8565300E95898 /* BooksListRepository.swift */,
+				0C0091C31F028CED00FC9DA3 /* BooksListDataSource.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -274,6 +283,7 @@
 				05B560D31E997422009DA57F /* AlertMessageProtocol.swift in Sources */,
 				05F56B311E6C389A0078C532 /* BookEntity.swift in Sources */,
 				0551C5F01EB11C0E00D2E947 /* LoadingIndicatorProtocol.swift in Sources */,
+				0C0091C61F02A20400FC9DA3 /* DataMemoryCacheManager.swift in Sources */,
 				05E1FAA91EF8565400E95898 /* BooksListRepository.swift in Sources */,
 				05F56B121E6C1ECC0078C532 /* AppDelegate.swift in Sources */,
 				05E1FAA61EF8555B00E95898 /* BooksListInteractor.swift in Sources */,
@@ -281,7 +291,9 @@
 				05E1FAA31EF854F000E95898 /* URLSessionManager.swift in Sources */,
 				059DD0B41E97AD3200EBB078 /* ServerError.swift in Sources */,
 				05F56B271E6C1F300078C532 /* BooksListPresenter.swift in Sources */,
+				0C0091CA1F02B64900FC9DA3 /* DataCacheManagerProtocol.swift in Sources */,
 				05F56B2C1E6C250C0078C532 /* BookCell.swift in Sources */,
+				0C0091C41F028CED00FC9DA3 /* BooksListDataSource.swift in Sources */,
 				05E1FAA11EF8548E00E95898 /* NetworkingManagerProtocol.swift in Sources */,
 				0551C5F21EB260DC00D2E947 /* TableLoadingIndicatorProtocol.swift in Sources */,
 			);

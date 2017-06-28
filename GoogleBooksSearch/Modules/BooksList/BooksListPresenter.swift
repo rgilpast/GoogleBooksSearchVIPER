@@ -8,21 +8,21 @@
 
 import Foundation
 
-typealias OnCompletionImageDownloadType = (Data?) -> (Void)
+public typealias OnCompletionImageDownloadType = (Data?) -> (Void)
 
-protocol BooksListPresenterProtocol: class
+public protocol BooksListPresenterProtocol: class
 {
     func viewDidLoad()
     func askForBooks(filter: String)
-    func askForBookImage(bookImageURL: String, onCompletion:OnCompletionImageDownloadType?)
-    func didSelectBook(bookIndex: Int)
+    func askForBookImage(book: BookViewEntity?, onCompletion:OnCompletionImageDownloadType?)
+    func didSelectBook(book: BookViewEntity)
 }
 
-class BooksListPresenter: BooksListPresenterProtocol {
+public class BooksListPresenter: BooksListPresenterProtocol {
 
-    private weak var ui:BooksListsUIProtocol?
+    public weak var ui:BooksListsUIProtocol?
     
-    private lazy var interactor: BooksListInteractor = {
+    public lazy var interactor: BooksListInteractor = {
         return BooksListInteractor()
     }()
     
@@ -52,7 +52,7 @@ class BooksListPresenter: BooksListPresenterProtocol {
                 
                 //map received books in a specific view model entities array and pass them to the ui for displaying
                 let viewBooks = books.map({ (bookEntity) -> BookViewEntity in
-                    return BookViewEntity(title: bookEntity.title, authors: bookEntity.authors.joined(separator: ", "), urlBookImage: bookEntity.imageURL)
+                    return BookViewEntity(id: bookEntity.id, title: bookEntity.title, authors: bookEntity.authors.joined(separator: ", "), urlBookImage: bookEntity.imageURL)
                 })
                 self?.ui?.showBooks(books: viewBooks)
             }
@@ -69,9 +69,9 @@ class BooksListPresenter: BooksListPresenterProtocol {
     }
 
     //ask for the related image of a book from its url
-    public func askForBookImage(bookImageURL: String, onCompletion:OnCompletionImageDownloadType?)
+    public func askForBookImage(book: BookViewEntity?, onCompletion:OnCompletionImageDownloadType?)
     {
-        self.interactor.downloadImageBook(urlImage: bookImageURL, onSuccess: { (imageData) -> (Void) in
+        self.interactor.getImageBook(uriImage: book?.urlBookImage, onSuccess: { (imageData) -> (Void) in
             DispatchQueue.main.async {
                 onCompletion?(imageData)
             }
@@ -83,9 +83,9 @@ class BooksListPresenter: BooksListPresenterProtocol {
         }
     }
 
-    public func didSelectBook(bookIndex: Int) {
+    public func didSelectBook(book: BookViewEntity) {
         
-        //TODO: fetch detail book with received index from interactor
+        //TODO: fetch detail book from interactor
         
     }
 }

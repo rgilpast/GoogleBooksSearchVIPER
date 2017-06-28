@@ -17,10 +17,12 @@ public struct BookEntity
     private let kImageLinksFieldKey = "imageLinks"
     private let kThumbnailFieldKey = "thumbnail"
     private let kVolumeInfoFieldKey = "volumeInfo"
+    private let kIdFieldKey = "id"
 
     //public properties
     public var title: String
     public var authors: Array<String>
+    public var id: String
     public var imageURL: String?
     
     public init?(json: JSON)
@@ -28,11 +30,14 @@ public struct BookEntity
         //check the existence of required data
         guard   let volumeInfo = json[kVolumeInfoFieldKey] as? JSON,
                 let title = volumeInfo[kTitleFieldKey] as? String,
-                let authors = volumeInfo[kAuthorsFieldKey] as? Array<String> else {
+                let authors = volumeInfo[kAuthorsFieldKey] as? Array<String>,
+                let id = json[kIdFieldKey] as? String
+        else {
                 return nil
         }
         self.title = title
         self.authors = authors
+        self.id = id
         
         //optional data
         self.imageURL = volumeInfo[kImageLinksFieldKey]?[kThumbnailFieldKey] as? String
