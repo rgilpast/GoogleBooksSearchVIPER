@@ -8,13 +8,11 @@
 
 import UIKit
 
-public typealias ErrorMessageCompletion = () -> ()
-
 public protocol BooksListsViewProtocol:class {
     
-    var presenter: BooksListPresenter? { get set }
+    var presenter: BooksListPresenterProtocol? { get set }
 
-    func showMessageError(error: Error?, completion: ErrorMessageCompletion?)
+    func showMessageError(error: Error?, completion: AlertMessageCompletion?)
     func showBooks(books: [BookViewEntity] )
 }
 
@@ -35,7 +33,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     
     var mBooks: [BookViewEntity] = []
     
-    public var presenter: BooksListPresenter?
+    public var presenter: BooksListPresenterProtocol?
     
     public lazy var loadingIndicator: UIRefreshControl = { [unowned self] in
         // Initialize the refresh control.
@@ -48,6 +46,8 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = NSLocalizedString("GBS_SEARCH_TITLE", comment: "")
         
         //add refresh control to table (refresh control will be the loading indicator)
         tableView?.refreshControl = loadingIndicator
@@ -101,7 +101,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
 //MARK : Message Error Management
 extension BooksListViewController
 {
-    public func showMessageError(error: Error?, completion: ErrorMessageCompletion?)
+    public func showMessageError(error: Error?, completion: AlertMessageCompletion?)
     {
         showAlertMessage(fromView: self, error: error, completion: completion)
     }

@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--Books List View Controller-->
         <scene sceneID="WT5-Sz-CBF">
             <objects>
                 <viewController storyboardIdentifier="BooksListViewController" id="BDu-jt-F9I" customClass="BooksListViewController" customModule="GoogleBooksSearch" customModuleProvider="target" sceneMemberID="viewController">
@@ -44,7 +44,7 @@
                             <constraint firstItem="6Qf-Uy-PfB" firstAttribute="top" secondItem="egk-f3-HqS" secondAttribute="bottom" id="pAL-6f-Jlv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="qy9-wI-cQO"/>
+                    <navigationItem key="navigationItem" id="qy9-wI-cQO"/>
                     <connections>
                         <outlet property="searchBar" destination="egk-f3-HqS" id="5Pa-Dh-kdi"/>
                         <outlet property="tableView" destination="6Qf-Uy-PfB" id="F0D-tl-gFO"/>
@@ -53,6 +53,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1te-dF-R9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-583" y="12"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vor-hO-FxO">
+            <objects>
+                <viewController id="x2o-ID-29R" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jeN-Nu-8ys"/>
+                        <viewControllerLayoutGuide type="bottom" id="IKY-yd-Oc4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NcO-wZ-Dp1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A14-Sa-ELv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="186" y="11"/>
         </scene>
     </scenes>
 </document>

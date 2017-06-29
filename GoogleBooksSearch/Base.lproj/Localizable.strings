@@ -5,6 +5,8 @@
   Created by Rafael Gil Pastor on 7/3/17.
   Copyright © 2017 Rafael Gil. All rights reserved.
 */
-"GBS_AAPP_TITLE" = "Google Books Search";
+"GBS_APP_TITLE" = "Google Books Search";
 "GBS_OK" = "Ok";
 "GBS_NO_BOOKS_AVAILABLE" = "No books are currently available. Please, type another search";
+"GBS_SEARCH_TITLE" = "Search"
+"GBS_DETAIL_TITLE" = "Detail"
