@@ -81,7 +81,6 @@
 		059DD0B01E97A36600EBB078 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				05F56B301E6C389A0078C532 /* BookEntity.swift */,
 				059DD0B31E97AD3200EBB078 /* ServerError.swift */,
 			);
 			path = Entities;
@@ -200,6 +199,7 @@
 		05F56B2F1E6C387B0078C532 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				05F56B301E6C389A0078C532 /* BookEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
