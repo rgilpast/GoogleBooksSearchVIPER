@@ -12,6 +12,8 @@ public typealias ErrorMessageCompletion = () -> ()
 
 public protocol BooksListsViewProtocol:class {
     
+    var presenter: BooksListPresenter? { get set }
+
     func showMessageError(error: Error?, completion: ErrorMessageCompletion?)
     func showBooks(books: [BookViewEntity] )
 }
@@ -33,9 +35,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     
     var mBooks: [BookViewEntity] = []
     
-    public lazy var presenter: BooksListPresenter = { [unowned self] in
-        return BooksListPresenter(withUI: self)
-    }()
+    public var presenter: BooksListPresenter?
     
     public lazy var loadingIndicator: UIRefreshControl = { [unowned self] in
         // Initialize the refresh control.
@@ -61,7 +61,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
         searchBar.delegate = self
         
         //call to presenter to give a chance when view did load
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
         
     }
     
@@ -78,7 +78,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
 
     public func refreshBooks()
     {
-        presenter.askForBooks(filter: searchBar.text ?? "")
+        presenter?.askForBooks(filter: searchBar.text ?? "")
     }
     
     public func showEmptyMessage()
@@ -140,7 +140,7 @@ extension BooksListViewController: UISearchBarDelegate {
         
         searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: true)
-        presenter.askForBooks(filter: searchBar.text ?? "")
+        presenter?.askForBooks(filter: searchBar.text ?? "")
     }
     
     public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

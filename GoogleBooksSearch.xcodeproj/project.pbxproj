@@ -28,6 +28,8 @@
 		0C0091C61F02A20400FC9DA3 /* DataMemoryCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0091C51F02A20400FC9DA3 /* DataMemoryCacheManager.swift */; };
 		0C0091CA1F02B64900FC9DA3 /* DataCacheManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0091C91F02B64800FC9DA3 /* DataCacheManagerProtocol.swift */; };
 		0C7120FD1F04D99D005A84AA /* BookEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7120FC1F04D99D005A84AA /* BookEntity.swift */; };
+		0C7120FF1F04FD87005A84AA /* BooksListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7120FE1F04FD87005A84AA /* BooksListRouter.swift */; };
+		0C7121011F052648005A84AA /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7121001F052648005A84AA /* RouterProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		0C0091C51F02A20400FC9DA3 /* DataMemoryCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMemoryCacheManager.swift; sourceTree = "<group>"; };
 		0C0091C91F02B64800FC9DA3 /* DataCacheManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCacheManagerProtocol.swift; sourceTree = "<group>"; };
 		0C7120FC1F04D99D005A84AA /* BookEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookEntity.swift; sourceTree = "<group>"; };
+		0C7120FE1F04FD87005A84AA /* BooksListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksListRouter.swift; sourceTree = "<group>"; };
+		0C7121001F052648005A84AA /* RouterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			children = (
 				05E1FA991EF84D9300E95898 /* Domain */,
 				05B560D11E9973C8009DA57F /* Views */,
+				0C7121001F052648005A84AA /* RouterProtocol.swift */,
 			);
 			name = Common;
 			path = Modules/Common;
@@ -175,6 +180,7 @@
 				05F56B2A1E6C24DE0078C532 /* Views */,
 				05F56B131E6C1ECC0078C532 /* BooksListViewController.swift */,
 				05F56B261E6C1F300078C532 /* BooksListPresenter.swift */,
+				0C7120FE1F04FD87005A84AA /* BooksListRouter.swift */,
 			);
 			name = BooksList;
 			path = Modules/BooksList;
@@ -286,6 +292,8 @@
 				05E1FAA91EF8565400E95898 /* BooksListRepository.swift in Sources */,
 				05F56B121E6C1ECC0078C532 /* AppDelegate.swift in Sources */,
 				05E1FAA61EF8555B00E95898 /* BooksListInteractor.swift in Sources */,
+				0C7121011F052648005A84AA /* RouterProtocol.swift in Sources */,
+				0C7120FF1F04FD87005A84AA /* BooksListRouter.swift in Sources */,
 				059DD0B21E97A3C400EBB078 /* Globals.swift in Sources */,
 				0C7120FD1F04D99D005A84AA /* BookEntity.swift in Sources */,
 				05E1FAA31EF854F000E95898 /* URLSessionManager.swift in Sources */,

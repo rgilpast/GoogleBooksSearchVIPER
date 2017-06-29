@@ -14,13 +14,14 @@ typealias OnSuccessDataResponseType = (Data?) -> (Void)
 public protocol BooksListInteractorProtocol {
     
     var repository: BooksListRepositoryProtocol? { get set }
+    
     func searchBooks(filter: String, onSuccess: OnBooksListResponseType?, onFailure: OnFailureResponseType? )
     func getImageBook(uriImage: String?, onSuccess: OnImageDataBookResponseType?, onFailure: OnFailureResponseType?)
 }
 
 public class BooksListInteractor: BooksListInteractorProtocol {
     
-    public var repository: BooksListRepositoryProtocol? = BooksListRepository()
+    public var repository: BooksListRepositoryProtocol?
     
     //get data books from repository
     public func searchBooks(filter: String, onSuccess: OnBooksListResponseType?, onFailure: OnFailureResponseType? ) {

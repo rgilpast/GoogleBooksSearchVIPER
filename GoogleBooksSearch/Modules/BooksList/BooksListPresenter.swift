@@ -12,6 +12,8 @@ public typealias OnCompletionImageDownloadType = (Data?) -> (Void)
 
 public protocol BooksListPresenterProtocol: class
 {
+    var interactor: BooksListInteractorProtocol? { get set }
+    
     func viewDidLoad()
     func askForBooks(filter: String)
     func askForBookImage(book: BookViewEntity?, onCompletion:OnCompletionImageDownloadType?)
@@ -20,16 +22,13 @@ public protocol BooksListPresenterProtocol: class
 
 public class BooksListPresenter: BooksListPresenterProtocol {
 
-    public weak var ui:BooksListsUIProtocol?
-    
-    public lazy var interactor: BooksListInteractor = {
-        return BooksListInteractor()
-    }()
+    fileprivate weak var ui:BooksListsUIProtocol?
+    public var interactor: BooksListInteractorProtocol?
     
     public init(withUI: BooksListsUIProtocol?)
     {
         //store the reference of ui
-        self.ui = withUI
+        ui = withUI
     }
 
     public func viewDidLoad() {
@@ -42,9 +41,9 @@ public class BooksListPresenter: BooksListPresenterProtocol {
     //ask for books matches the criteria received in filter parameter
     public func askForBooks(filter: String) {
         
-        self.ui?.showLoadingIndicator()
+        ui?.showLoadingIndicator()
         
-        self.interactor.searchBooks(filter: filter, onSuccess: {[weak self] (books) -> (Void) in
+        interactor?.searchBooks(filter: filter, onSuccess: {[weak self] (books) -> (Void) in
 
             DispatchQueue.main.async {
                 
@@ -71,7 +70,7 @@ public class BooksListPresenter: BooksListPresenterProtocol {
     //ask for the related image of a book from its url
     public func askForBookImage(book: BookViewEntity?, onCompletion:OnCompletionImageDownloadType?)
     {
-        self.interactor.getImageBook(uriImage: book?.urlBookImage, onSuccess: { (imageData) -> (Void) in
+        interactor?.getImageBook(uriImage: book?.urlBookImage, onSuccess: { (imageData) -> (Void) in
             DispatchQueue.main.async {
                 onCompletion?(imageData)
             }

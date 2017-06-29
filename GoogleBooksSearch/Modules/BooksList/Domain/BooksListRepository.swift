@@ -14,23 +14,19 @@ public typealias OnImageDataBookResponseType = (Data?) -> (Void)
 
 public protocol BooksListRepositoryProtocol {
 
+    var dataSource: BooksListDataSourceProtocol? { get set }
+    var imageCacheManager: DataCacheManagerProtocol? { get set }
+    var networkingManager: NetworkingManagerProtocol? { get set }
+
     func searchBooks(filter: String, onSuccess: OnBooksListResponseType?, onFailure: OnFailureResponseType? )
     func getImageBook(uriImage: String, onSuccess: OnImageDataBookResponseType?, onFailure: OnFailureResponseType?)
 }
 
 public class BooksListRepository: BooksListRepositoryProtocol {
     
-    fileprivate lazy var networkingManager: NetworkingManagerProtocol? = {
-       
-        var manager: NetworkingManagerProtocol? = nil
-        if let urlBase = URL(string:BooksListRepositoryConstants.baseURL) {
-            manager = URLSessionManager.createManager(forBaseURL: urlBase)
-        }
-        return manager
-    }()
-    
-    public var imageCacheManager: DataCacheManagerProtocol? = DataMemoryCacheManager.sharedInstance
-    public var dataSource: BooksListDataSourceProtocol? = BooksListDataSource()
+    public var networkingManager: NetworkingManagerProtocol?
+    public var imageCacheManager: DataCacheManagerProtocol?
+    public var dataSource: BooksListDataSourceProtocol?
     
     //get data books with Goggle API
     public func searchBooks(filter: String, onSuccess: OnBooksListResponseType?, onFailure: OnFailureResponseType? ) {
@@ -92,6 +88,5 @@ fileprivate extension BooksListRepository {
 }
 
 fileprivate struct BooksListRepositoryConstants {
-    static let baseURL: String = "https://www.googleapis.com/books/v1"
     static let volumesResource: String = "volumes"
 }
