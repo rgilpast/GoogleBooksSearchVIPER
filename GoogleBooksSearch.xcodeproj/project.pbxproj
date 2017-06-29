@@ -426,7 +426,6 @@
 		05F56B211E6C1ECC0078C532 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 389LTVUW79;
 				INFOPLIST_FILE = GoogleBooksSearch/Info.plist;
@@ -440,7 +439,6 @@
 		05F56B221E6C1ECC0078C532 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 389LTVUW79;
 				INFOPLIST_FILE = GoogleBooksSearch/Info.plist;
