@@ -54,10 +54,10 @@
             </objects>
             <point key="canvasLocation" x="-583" y="12"/>
         </scene>
-        <!--View Controller-->
+        <!--Book Detail View Controller-->
         <scene sceneID="vor-hO-FxO">
             <objects>
-                <viewController id="x2o-ID-29R" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookDetailViewController" id="x2o-ID-29R" customClass="BookDetailViewController" customModule="GoogleBooksSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jeN-Nu-8ys"/>
                         <viewControllerLayoutGuide type="bottom" id="IKY-yd-Oc4"/>
