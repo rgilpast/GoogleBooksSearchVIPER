@@ -65,12 +65,27 @@
                     <view key="view" contentMode="scaleToFill" id="NcO-wZ-Dp1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kiW-ib-Mpg" userLabel="Book Detail Table View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kiW-ib-Mpg" secondAttribute="trailing" id="8tA-oI-Ci4"/>
+                            <constraint firstItem="kiW-ib-Mpg" firstAttribute="leading" secondItem="NcO-wZ-Dp1" secondAttribute="leading" id="WqZ-fw-grf"/>
+                            <constraint firstItem="kiW-ib-Mpg" firstAttribute="top" secondItem="NcO-wZ-Dp1" secondAttribute="top" id="Y0G-h0-Bng"/>
+                            <constraint firstItem="IKY-yd-Oc4" firstAttribute="top" secondItem="kiW-ib-Mpg" secondAttribute="bottom" id="q2q-BC-OYD"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="kiW-ib-Mpg" id="KRt-Hp-Yvz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A14-Sa-ELv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186" y="11"/>
+            <point key="canvasLocation" x="184.80000000000001" y="10.344827586206897"/>
         </scene>
     </scenes>
 </document>

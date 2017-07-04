@@ -10,3 +10,5 @@
 "GBS_NO_BOOKS_AVAILABLE" = "No hay libros disponibles para esta búsqueda. Por favor, busque con otros términos";
 "GBS_SEARCH_TITLE" = "Buscar";
 "GBS_DETAIL_TITLE" = "Detalle";
+"GBS_DETAIL_BACK" = "Volver";
+"GBS_DETAIL_PAGES" = "páginas";

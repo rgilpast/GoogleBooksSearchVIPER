@@ -18,20 +18,12 @@ public protocol BooksListsViewProtocol:class {
 
 public typealias BooksListsUIProtocol = BooksListsViewProtocol & TableLoadingIndicatorProtocol & AlertMessageProtocol
 
-public struct BookViewEntity
-{
-    let id: String!
-    let title: String!
-    let authors: String!
-    let urlBookImage : String?
-}
-
 public class BooksListViewController: UIViewController, BooksListsUIProtocol{
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak public var tableView: UITableView?
     
-    var mBooks: [BookViewEntity] = []
+    fileprivate var books: [BookViewEntity] = []
     
     public var presenter: BooksListPresenterProtocol?
     
@@ -49,14 +41,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
         
         title = NSLocalizedString("GBS_SEARCH_TITLE", comment: "")
         
-        //add refresh control to table (refresh control will be the loading indicator)
-        tableView?.refreshControl = loadingIndicator
-        tableView?.delegate = self
-        tableView?.dataSource = self
-        tableView?.rowHeight = UITableViewAutomaticDimension
-        tableView?.estimatedRowHeight = 44.0
-        tableView?.register(BookCell.classForCoder(), forCellReuseIdentifier: BookCell.identifier)
-        tableView?.separatorStyle = .none
+        setupTable(withLoadingIndicator: loadingIndicator)
         
         searchBar.delegate = self
         
@@ -71,7 +56,7 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     }
 
     public func showBooks(books: [BookViewEntity]) {
-        mBooks = books
+        self.books = books
         tableView?.separatorStyle = .singleLine
         tableView?.reloadData()
     }
@@ -97,6 +82,22 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     }
 }
 
+fileprivate extension BooksListViewController {
+    
+    func setupTable(withLoadingIndicator loadingIndicator: UIRefreshControl) {
+        
+        //add refresh control to table (refresh control will be the loading indicator)
+        tableView?.refreshControl = loadingIndicator
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 44.0
+        tableView?.register(BookCell.classForCoder(), forCellReuseIdentifier: BookCell.identifier)
+        tableView?.separatorStyle = .none
+        tableView?.allowsSelection = true
+        tableView?.allowsMultipleSelection = false
+    }
+}
 
 //MARK : Message Error Management
 extension BooksListViewController
@@ -112,7 +113,7 @@ extension BooksListViewController: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return mBooks.count
+        return books.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,7 +121,7 @@ extension BooksListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: BookCell.identifier, for: indexPath as IndexPath) as! BookCell
         
         //pass data to cell from the related book
-        cell.bindBook(book: mBooks[indexPath.row], presenter: presenter)
+        cell.bindBook(book: books[indexPath.row], presenter: presenter)
         
         return cell
     }
@@ -130,7 +131,10 @@ extension BooksListViewController: UITableViewDataSource {
 extension BooksListViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: call to presenter with index path of selected cell
+        
+        if indexPath.row >= 0 && indexPath.row < books.count {
+            presenter?.didSelectBook(book: books[indexPath.row])
+        }
     }
 }
 

@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 public typealias OnCompletionImageDownloadType = (Data?) -> (Void)
 
 public protocol BooksListPresenterProtocol: class
 {
     var interactor: BooksListInteractorProtocol? { get set }
+    weak var router: BooksListRouterProtocol? { get set }
     
     func viewDidLoad()
     func askForBooks(filter: String)
@@ -21,21 +23,23 @@ public protocol BooksListPresenterProtocol: class
 }
 
 public class BooksListPresenter: BooksListPresenterProtocol {
-
+    
     fileprivate weak var ui:BooksListsUIProtocol?
+    public weak var router: BooksListRouterProtocol?
+    
     public var interactor: BooksListInteractorProtocol?
     
-    public init(withUI: BooksListsUIProtocol?)
+    public init(withUI: BooksListsUIProtocol?, router: BooksListRouterProtocol?)
     {
-        //store the reference of ui
+        //store the references of ui and router
         ui = withUI
+        self.router = router
     }
 
     public func viewDidLoad() {
         
         //by default ask for all books
         askForBooks(filter: "")
-        
     }
 
     //ask for books matches the criteria received in filter parameter
@@ -84,7 +88,8 @@ public class BooksListPresenter: BooksListPresenterProtocol {
 
     public func didSelectBook(book: BookViewEntity) {
         
-        //TODO: fetch detail book from interactor
-        
+        if let view = ui as? UIViewController {
+            router?.showDetailBook(forBookId: book.id, fromView: view, output: nil)
+        }
     }
 }

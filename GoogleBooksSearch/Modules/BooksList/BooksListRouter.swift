@@ -9,9 +9,18 @@
 import Foundation
 import UIKit
 
-public class BooksListRouter: RouterProtocol {
+public protocol BooksListRouterProtocol: class, RouterProtocol {
+    
+    func showDetailBook(forBookId bookid: String, fromView: UIViewController, output: RouterOutputProtocol?)
+}
 
-    fileprivate static var networkingManager: NetworkingManagerProtocol? = {
+public class BooksListRouter: BooksListRouterProtocol {
+
+
+    public var mainView: UIViewController?
+    public var detailRouter: RouterProtocol?
+    
+    fileprivate var networkingManager: NetworkingManagerProtocol? = {
         
         var manager: NetworkingManagerProtocol? = nil
         if let urlBase = URL(string:BooksListRouterConstants.baseURL) {
@@ -20,18 +29,24 @@ public class BooksListRouter: RouterProtocol {
         return manager
     }()
     
-    public static func create(withInfo info: Any?) -> UIViewController? {
+    public func create(withInfo info: Any?, output: RouterOutputProtocol?) -> UIViewController? {
         
-        guard let view = createInstanceFromStoryboard() else {
+        mainView = BooksListRouter.createInstanceFromStoryboard()
+        guard let ui = mainView as? BooksListsUIProtocol else {
             return nil
         }
         
-        if let ui = view as? BooksListsUIProtocol {
-            createDependencies(forUI: ui)
-        }
+        createDependencies(forUI: ui)
         
-        let navigationView = UINavigationController(rootViewController: view)
+        let navigationView = UINavigationController(rootViewController: mainView!)
         return navigationView
+    }
+    
+    public func showDetailBook(forBookId bookid: String, fromView: UIViewController, output: RouterOutputProtocol?) {
+        
+        if let bookDetailView = detailRouter?.create(withInfo: BookDetailRouterInfo(bookId: bookid), output: output) {
+            fromView.show(bookDetailView, sender: nil)
+        }
     }
 }
 
@@ -45,9 +60,11 @@ fileprivate extension BooksListRouter {
         return view
     }
     
-    class func createDependencies(forUI ui: BooksListsUIProtocol) {
+    func createDependencies(forUI ui: BooksListsUIProtocol) {
         
-        let presenter = BooksListPresenter(withUI: ui)
+        detailRouter = BookDetailRouter()
+        
+        let presenter = BooksListPresenter(withUI: ui, router: self)
         let interactor = BooksListInteractor()
         let repository = BooksListRepository()
         var imagesManager = BookImagesManager.sharedInstance

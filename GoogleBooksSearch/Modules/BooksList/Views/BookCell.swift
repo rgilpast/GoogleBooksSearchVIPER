@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class BookCell: UITableViewCell
+public class BookCell: UITableViewCell
 {
     static let identifier: String = "BookCell"
     
@@ -55,7 +55,7 @@ class BookCell: UITableViewCell
         setupCell()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupCell()
     }
@@ -87,6 +87,7 @@ private extension BookCell {
     func setupCell() {
         
         selectionStyle = .none
+        accessoryType = .disclosureIndicator
         clipsToBounds = true
         
         contentView.addSubview(thumbnail)

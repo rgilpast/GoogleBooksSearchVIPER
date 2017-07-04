@@ -9,9 +9,26 @@
 import Foundation
 import UIKit
 
-public class BookDetailRouter: RouterProtocol {
+public typealias BookDetailExitResult = Any
+
+public struct BookDetailRouterInfo {
+    var bookId: String
+}
+
+public protocol BookDetailRouterProtocol: class, RouterProtocol {
     
-    fileprivate static var networkingManager: NetworkingManagerProtocol? = {
+    func back()
+}
+
+public protocol BookDetailOutputProtocol: RouterOutputProtocol {
+    
+    func exit(result: BookDetailExitResult?)
+}
+
+public class BookDetailRouter: BookDetailRouterProtocol {
+    
+    fileprivate weak var outputHandler: BookDetailOutputProtocol?
+    fileprivate var networkingManager: NetworkingManagerProtocol? = {
         
         var manager: NetworkingManagerProtocol? = nil
         if let urlBase = URL(string:BookDetailRouterConstants.baseURL) {
@@ -19,19 +36,25 @@ public class BookDetailRouter: RouterProtocol {
         }
         return manager
     }()
-
-    public static func create(withInfo info: Any?) -> UIViewController? {
+    
+    public var mainView: UIViewController?
+    
+    public func create(withInfo info: Any?, output: RouterOutputProtocol?) -> UIViewController? {
         
-        guard let view = createInstanceFromStoryboard() else {
+        mainView = BookDetailRouter.createInstanceFromStoryboard()
+        guard let info = info as? BookDetailRouterInfo, let ui = mainView as? BookDetailUIProtocol else {
             return nil
         }
         
-        if let ui = view as? BookDetailUIProtocol {
-            createDependencies(forUI: ui)
-        }
+        createDependencies(forUI: ui, output: output as? BookDetailOutputProtocol, bookId: info.bookId)
         
-        let navigationView = UINavigationController(rootViewController: view)
-        return navigationView
+        return mainView
+    }
+    
+    public func back() {
+        mainView?.dismiss(animated: true, completion: { [weak self] in
+            self?.outputHandler?.exit(result: nil)
+        })
     }
 }
 
@@ -39,24 +62,31 @@ fileprivate extension BookDetailRouter {
     
     class func createInstanceFromStoryboard() -> UIViewController? {
         
-        guard let view = createViewInstance(witViewId: BookDetailRouterConstants.bookDetailViewId, fromStoryboard: BookDetailRouterConstants.bookDetailSoryboardId) else {
+        guard let view = BookDetailRouter.createViewInstance(witViewId: BookDetailRouterConstants.bookDetailViewId, fromStoryboard: BookDetailRouterConstants.bookDetailSoryboardId) else {
             return nil
         }
         return view
     }
     
-    class func createDependencies(forUI ui: BookDetailUIProtocol) {
+    func createDependencies(forUI ui: BookDetailUIProtocol, output: BookDetailOutputProtocol?, bookId: String) {
         
-        let presenter = BookDetailPresenter(withUI: ui)
+        let presenter = BookDetailPresenter(withUI: ui, router: self)
         let interactor = BookDetailInteractor()
         let repository = BookDetailRepository()
+        var imagesManager = BookImagesManager.sharedInstance
         let imageCacheManager = DataMemoryCacheManager.sharedInstance
+        let datasource = BookDetailDataSource(withBookId: bookId)
         
-        repository.imageCacheManager = imageCacheManager
+        imagesManager.imageCacheManager = imageCacheManager
+        imagesManager.networkingManager = networkingManager
+        repository.dataSource = datasource
+        repository.imagesManager = imagesManager
         repository.networkingManager = networkingManager
         interactor.repository = repository
         presenter.interactor = interactor
         ui.presenter = presenter
+        
+        outputHandler = output
     }
 }
 

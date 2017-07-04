@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var mainRouter: RouterProtocol?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,8 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //create the main window
         createWindow()
         
+        mainRouter = BooksListRouter()
         //and install the main root view controller
-        installRootView(view: BooksListRouter.create(withInfo: nil) ?? UIViewController())
+        installRootView(view: mainRouter?.create(withInfo: nil, output: nil) ?? UIViewController())
         
         return true
     }

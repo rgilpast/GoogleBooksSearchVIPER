@@ -8,9 +8,6 @@
 
 import Foundation
 
-typealias OnSuccessResponseType = (Array<BookEntity>) -> (Void)
-typealias OnSuccessDataResponseType = (Data?) -> (Void)
-
 public protocol BooksListInteractorProtocol {
     
     var repository: BooksListRepositoryProtocol? { get set }

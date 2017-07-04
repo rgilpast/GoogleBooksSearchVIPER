@@ -9,11 +9,18 @@
 import Foundation
 import UIKit
 
-public protocol RouterProtocol {
-    static func create(withInfo info: Any?) -> UIViewController?
+public protocol RouterOutputProtocol: class {
+
 }
 
-extension RouterProtocol {
+public protocol RouterProtocol {
+    
+    var mainView: UIViewController? { get set }
+
+    func create(withInfo info: Any?, output: RouterOutputProtocol?) -> UIViewController?
+}
+
+public extension RouterProtocol {
     
     static func createViewInstance(witViewId: String, fromStoryboard storyBoardName: String) -> UIViewController? {
         
