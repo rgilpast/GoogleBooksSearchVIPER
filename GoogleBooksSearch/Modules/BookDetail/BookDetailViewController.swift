@@ -17,14 +17,14 @@ public protocol BookDetailViewProtocol:class {
     func showBookDetail(detail: BookDetailViewEntity)
 }
 
-public typealias BookDetailUIProtocol = BookDetailViewProtocol & AlertMessageProtocol & LoadingIndicatorProtocol
+public typealias BookDetailUIProtocol = BookDetailViewProtocol & AlertMessageProtocol & ViewLoadingIndicatorProtocol
 
 fileprivate enum BookDetailCellType: Int {
     case MainInfo
     case SinopsisInfo
 }
 
-public class BookDetailViewController: UIViewController, BookDetailUIProtocol, ViewLoadingIndicatorProtocol {
+public class BookDetailViewController: UIViewController, BookDetailUIProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -34,16 +34,6 @@ public class BookDetailViewController: UIViewController, BookDetailUIProtocol, V
         let button = UIBarButtonItem(title: NSLocalizedString("GBS_DETAIL_BACK", comment: ""), style: .plain, target: self, action: #selector(backButtonTapped(_:)))
         return button
     }()
-    
-    public lazy var loadingIndicator: UIActivityIndicatorView = {
-        
-        let indicator = UIActivityIndicatorView(frame: .zero)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        indicator.activityIndicatorViewStyle = .whiteLarge
-        indicator.color = UIColor.purple
-        return indicator
-    }()
-    
     
     public var presenter: BookDetailPresenter?
 

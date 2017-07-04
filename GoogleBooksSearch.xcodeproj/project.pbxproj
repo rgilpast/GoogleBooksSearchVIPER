@@ -43,6 +43,7 @@
 		0C86C5951F0A1C7D00C04A04 /* ViewLoadingIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C86C5941F0A1C7D00C04A04 /* ViewLoadingIndicatorProtocol.swift */; };
 		0C9DC8AB1F062F4D00642D84 /* BookDetailMainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DC8AA1F062F4D00642D84 /* BookDetailMainInfoCell.swift */; };
 		0C9DC8AD1F06368B00642D84 /* BookDetailAdditionalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DC8AC1F06368B00642D84 /* BookDetailAdditionalInfoCell.swift */; };
+		0CCF43261F0BE100003183C4 /* UIView+LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCF43251F0BE100003183C4 /* UIView+LoadingIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		0C86C5941F0A1C7D00C04A04 /* ViewLoadingIndicatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLoadingIndicatorProtocol.swift; sourceTree = "<group>"; };
 		0C9DC8AA1F062F4D00642D84 /* BookDetailMainInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailMainInfoCell.swift; sourceTree = "<group>"; };
 		0C9DC8AC1F06368B00642D84 /* BookDetailAdditionalInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailAdditionalInfoCell.swift; sourceTree = "<group>"; };
+		0CCF43251F0BE100003183C4 /* UIView+LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LoadingIndicator.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				0551C5EF1EB11C0E00D2E947 /* LoadingIndicatorProtocol.swift */,
 				0551C5F11EB260DC00D2E947 /* TableLoadingIndicatorProtocol.swift */,
 				0C86C5941F0A1C7D00C04A04 /* ViewLoadingIndicatorProtocol.swift */,
+				0CCF43251F0BE100003183C4 /* UIView+LoadingIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				05E1FAA61EF8555B00E95898 /* BooksListInteractor.swift in Sources */,
 				0C7121071F054986005A84AA /* BookDetailPresenter.swift in Sources */,
 				0C7121011F052648005A84AA /* RouterProtocol.swift in Sources */,
+				0CCF43261F0BE100003183C4 /* UIView+LoadingIndicator.swift in Sources */,
 				0C7120FF1F04FD87005A84AA /* BooksListRouter.swift in Sources */,
 				059DD0B21E97A3C400EBB078 /* Globals.swift in Sources */,
 				0C7121051F0547AF005A84AA /* BookDetailViewController.swift in Sources */,

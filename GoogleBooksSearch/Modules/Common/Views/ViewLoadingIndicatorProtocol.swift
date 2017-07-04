@@ -12,64 +12,16 @@ import UIKit
 public protocol ViewLoadingIndicatorProtocol: LoadingIndicatorProtocol {
     
     var view: UIView! { get }
-    var loadingIndicator: UIActivityIndicatorView { get }
 }
 
 //MARK : Loading Indicator
 public extension ViewLoadingIndicatorProtocol
 {
     func showLoadingIndicator() {
-        
-        removeCurrentCanvasView()
-        loadingIndicator.removeFromSuperview()
-        let newCanvas = createLoadingIndicatorCanvas()
-        paintLoadingIndicator(onCanvas: newCanvas)
-        showCanvas(canvasView: newCanvas)
-        loadingIndicator.startAnimating()
+        view.showLoadingIndicator()
     }
     
     func hideLoadingIndicator() {
-        loadingIndicator.stopAnimating()
-        removeCurrentCanvasView()
+        view.hideLoadingIndicator()
     }
-}
-
-fileprivate extension ViewLoadingIndicatorProtocol {
-    
-    func createLoadingIndicatorCanvas() -> UIView {
-        let canvasView = UIView()
-        canvasView.translatesAutoresizingMaskIntoConstraints = false
-        canvasView.backgroundColor = UIColor.white
-        canvasView.isUserInteractionEnabled = false
-        canvasView.tag = ViewLoadingIndicatorProtocolConstants.canvasViewTag
-        return canvasView
-    }
-    
-    func removeCurrentCanvasView() {
-        let canvasView = view.viewWithTag(ViewLoadingIndicatorProtocolConstants.canvasViewTag)
-        canvasView?.removeFromSuperview()
-    }
-    
-    func paintLoadingIndicator(onCanvas canvas: UIView) {
-        canvas.addSubview(loadingIndicator)
-        loadingIndicator.centerYAnchor.constraint(equalTo: canvas.centerYAnchor).isActive = true
-        loadingIndicator.centerXAnchor.constraint(equalTo: canvas.centerXAnchor).isActive = true
-    }
-    
-    func showCanvas(canvasView canvas: UIView) {
-
-        view.addSubview(canvas)
-        
-        canvas.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        canvas.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        canvas.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        canvas.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        
-        view.bringSubview(toFront: canvas)
-    }
-}
-
-fileprivate struct ViewLoadingIndicatorProtocolConstants {
-    
-    static let canvasViewTag: Int = 9999
 }

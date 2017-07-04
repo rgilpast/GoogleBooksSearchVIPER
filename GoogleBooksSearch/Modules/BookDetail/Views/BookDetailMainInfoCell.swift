@@ -111,11 +111,13 @@ public class BookDetailMainInfoCell: UITableViewCell {
         categoryAndPageCount.text = detail?.categoryAndPageCount
         categoryAndPageCount.sizeToFit()
         
-        //assign default image
-        coverImage.image = UIImage(named: "generic-book")
+        coverImage.showLoadingIndicator()
 
         //ask for the cover image
         presenter?.askForBookImage(book: detail, onCompletion: {[weak self] (imageData) -> (Void) in
+            
+            self?.coverImage.hideLoadingIndicator()
+            
             if let data = imageData
             {
                 self?.coverImage.image = UIImage(data: data)
