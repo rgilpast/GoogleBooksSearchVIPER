@@ -51,11 +51,17 @@ public class BookDetailViewController: UIViewController, BookDetailUIProtocol, V
 
         title = NSLocalizedString("GBS_DETAIL_TITLE", comment: "")
         
+        setupBackButton()
         setupTable()
         
         presenter?.viewDidLoad()
     }
 
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,8 +86,14 @@ fileprivate extension BookDetailViewController {
         tableView?.separatorStyle = .none
     }
     
-    @objc func backButtonTapped(_ sender : UIButton) {
+    func setupBackButton() {
         
+        self.navigationItem.hidesBackButton = true;
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonTapped(_ sender : UIButton) {
+        presenter?.back()
     }
 }
 

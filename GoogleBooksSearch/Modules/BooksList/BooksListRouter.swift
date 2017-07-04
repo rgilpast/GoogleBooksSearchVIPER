@@ -45,7 +45,7 @@ public class BooksListRouter: BooksListRouterProtocol {
     public func showDetailBook(forBookId bookid: String, fromView: UIViewController, output: RouterOutputProtocol?) {
         
         if let bookDetailView = detailRouter?.create(withInfo: BookDetailRouterInfo(bookId: bookid), output: output) {
-            fromView.show(bookDetailView, sender: nil)
+            fromView.navigationController?.pushViewController(bookDetailView, animated: true)
         }
     }
 }

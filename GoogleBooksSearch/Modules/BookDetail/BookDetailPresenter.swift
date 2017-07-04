@@ -27,14 +27,12 @@ public class BookDetailPresenter: BookDetailPresenterProtocol {
     
     public required init(withUI: BookDetailUIProtocol?, router: BookDetailRouterProtocol?)
     {
-        //store the reference of ui and router
         ui = withUI
         self.router = router
     }
     
     public func viewDidLoad() {
         
-        //by default ask for all books
         askBookDetail()
     }
 }
@@ -48,22 +46,19 @@ public extension BookDetailPresenter {
         
         interactor?.getBookDetail(onSuccess: { [weak self] (detail) -> (Void) in
             
+            let publishInfo = self?.buildPublishInfo(publisher: detail.publisher, publishDate: detail.publishedDate)
+            let categoryAndPageCountInfo = self?.buildCategoryAndPageCountInfo(categories: detail.categories, pageCount: detail.pageCount)
+            
+            let bookDetail = BookDetailViewEntity( urlBookImage: detail.imageURL,
+                                                   title: detail.title,
+                                                   subtitle: detail.subtitle,
+                                                   authors: detail.authors.joined(separator: ", "),
+                                                   publishInfo: publishInfo,
+                                                   categoryAndPageCount: categoryAndPageCountInfo,
+                                                   sinopsis: detail.sinopsis)
             DispatchQueue.main.async {
                 
                 self?.ui?.hideLoadingIndicator()
-                
-                let publishInfo = self?.buildPublishInfo(publisher: detail.publisher, publishDate: detail.publishedDate)
-                let categoryAndPageCountInfo = self?.buildCategoryAndPageCountInfo(categories: detail.categories, pageCount: detail.pageCount)
-                
-                //map received books in a specific view model entities array and pass them to the ui for displaying
-                let bookDetail = BookDetailViewEntity( urlBookImage: detail.imageURL,
-                                                       title: detail.title,
-                                                       subtitle: detail.subtitle,
-                                                       authors: detail.authors.joined(separator: ", "),
-                                                       publishInfo: publishInfo,
-                                                       categoryAndPageCount: categoryAndPageCountInfo,
-                                                       sinopsis: detail.sinopsis)
-                
                 self?.ui?.showBookDetail(detail: bookDetail)
             }
             

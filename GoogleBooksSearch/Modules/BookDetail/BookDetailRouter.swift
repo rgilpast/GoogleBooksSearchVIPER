@@ -52,9 +52,9 @@ public class BookDetailRouter: BookDetailRouterProtocol {
     }
     
     public func back() {
-        mainView?.dismiss(animated: true, completion: { [weak self] in
-            self?.outputHandler?.exit(result: nil)
-        })
+        
+        mainView?.navigationController?.popViewController(animated: true)
+        outputHandler?.exit(result: nil)
     }
 }
 

@@ -17,8 +17,6 @@ public class BookDetailMainInfoCell: UITableViewCell {
         var imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        //assign by default image
-        imageView.image = UIImage(named: "generic_book")
         return imageView
     }()
     
@@ -112,11 +110,17 @@ public class BookDetailMainInfoCell: UITableViewCell {
 
         categoryAndPageCount.text = detail?.categoryAndPageCount
         categoryAndPageCount.sizeToFit()
+        
+        //assign default image
+        coverImage.image = UIImage(named: "generic-book")
 
+        //ask for the cover image
         presenter?.askForBookImage(book: detail, onCompletion: {[weak self] (imageData) -> (Void) in
             if let data = imageData
             {
                 self?.coverImage.image = UIImage(data: data)
+            } else {
+                self?.coverImage.image = UIImage(named: "generic-book")
             }
         })
     }

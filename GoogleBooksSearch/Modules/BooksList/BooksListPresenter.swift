@@ -31,7 +31,6 @@ public class BooksListPresenter: BooksListPresenterProtocol {
     
     public init(withUI: BooksListsUIProtocol?, router: BooksListRouterProtocol?)
     {
-        //store the references of ui and router
         ui = withUI
         self.router = router
     }
