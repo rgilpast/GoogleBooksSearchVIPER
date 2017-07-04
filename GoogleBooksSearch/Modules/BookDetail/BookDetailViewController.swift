@@ -40,6 +40,7 @@ public class BookDetailViewController: UIViewController, BookDetailUIProtocol, V
         let indicator = UIActivityIndicatorView(frame: .zero)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.activityIndicatorViewStyle = .whiteLarge
+        indicator.color = UIColor.purple
         return indicator
     }()
     
@@ -53,13 +54,8 @@ public class BookDetailViewController: UIViewController, BookDetailUIProtocol, V
         
         setupBackButton()
         setupTable()
-        
-        presenter?.viewDidLoad()
-    }
 
-    override public func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        presenter?.viewDidLoad()
     }
     
     override public func didReceiveMemoryWarning() {

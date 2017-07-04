@@ -37,9 +37,9 @@ public extension ViewLoadingIndicatorProtocol
 fileprivate extension ViewLoadingIndicatorProtocol {
     
     func createLoadingIndicatorCanvas() -> UIView {
-        let canvasView = UIView(frame: .zero)
+        let canvasView = UIView()
         canvasView.translatesAutoresizingMaskIntoConstraints = false
-        canvasView.backgroundColor = UIColor.init(white: 100, alpha: 0.25)
+        canvasView.backgroundColor = UIColor.white
         canvasView.isUserInteractionEnabled = false
         canvasView.tag = ViewLoadingIndicatorProtocolConstants.canvasViewTag
         return canvasView
@@ -51,7 +51,6 @@ fileprivate extension ViewLoadingIndicatorProtocol {
     }
     
     func paintLoadingIndicator(onCanvas canvas: UIView) {
-        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         canvas.addSubview(loadingIndicator)
         loadingIndicator.centerYAnchor.constraint(equalTo: canvas.centerYAnchor).isActive = true
         loadingIndicator.centerXAnchor.constraint(equalTo: canvas.centerXAnchor).isActive = true
@@ -65,6 +64,8 @@ fileprivate extension ViewLoadingIndicatorProtocol {
         canvas.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         canvas.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         canvas.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        view.bringSubview(toFront: canvas)
     }
 }
 
