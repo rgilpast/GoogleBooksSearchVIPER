@@ -17,6 +17,7 @@ public struct BookDetailEntity {
     private let kSubtitleFieldKey = "subtitle"
     private let kAuthorsFieldKey = "authors"
     private let kImageLinksFieldKey = "imageLinks"
+    private let kThumbnailImageFieldKey = "thumbnail"
     private let kSmallImageFieldKey = "small"
     private let kCategoriesFieldKey = "categories"
     private let kPageCountFieldKey = "pageCount"
@@ -51,7 +52,7 @@ public struct BookDetailEntity {
         self.id = id
         
         //optional data
-        self.imageURL = volumeInfo[kImageLinksFieldKey]?[kSmallImageFieldKey] as? String
+        self.imageURL = volumeInfo[kImageLinksFieldKey]?[kSmallImageFieldKey] as? String ?? volumeInfo[kImageLinksFieldKey]?[kThumbnailImageFieldKey] as? String
         self.subtitle = volumeInfo[kSubtitleFieldKey] as? String
         self.categories = volumeInfo[kCategoriesFieldKey] as? Array<String>
         self.pageCount = volumeInfo[kPageCountFieldKey] as? Int

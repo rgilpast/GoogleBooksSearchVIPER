@@ -47,6 +47,7 @@ fileprivate extension BookImagesManager {
     //download image from a string url
     func downloadImageBook(urlImage: String, onSuccess: OnImageDataBookResponseType?, onFailure: OnFailureResponseType?) {
         if let url = URL(string: urlImage) {
+            
             networkingManager?.getDataFromUrl(url: url, completion: { [weak self] (dataImage, urlResponse, error) in
                 if error != nil
                 {

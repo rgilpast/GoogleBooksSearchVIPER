@@ -10,5 +10,5 @@
 "GBS_NO_BOOKS_AVAILABLE" = "No books are currently available. Please, type another search";
 "GBS_SEARCH_TITLE" = "Search";
 "GBS_DETAIL_TITLE" = "Detail";
-"GBS_DETAIL_BACK" = "Back";
+"GBS_DETAIL_BACK" = "< Back";
 "GBS_DETAIL_PAGES" = "pages";
