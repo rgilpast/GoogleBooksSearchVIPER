@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class BookCell: UITableViewCell
+public class BookCell: UITableViewCell
 {
     static let identifier: String = "BookCell"
     
@@ -55,7 +55,7 @@ class BookCell: UITableViewCell
         setupCell()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupCell()
     }
@@ -73,15 +73,12 @@ class BookCell: UITableViewCell
         detail.text =  book?.authors
         detail.sizeToFit()
         
-        if let bookImageURL = book?.urlBookImage
-        {
-            presenter?.askForBookImage(bookImageURL: bookImageURL, onCompletion: {[weak self] (imageData) -> (Void) in
-                if let data = imageData
-                {
-                    self?.thumbnail.image = UIImage(data: data)
-                }
-            })
-        }
+        presenter?.askForBookImage(book: book, onCompletion: {[weak self] (imageData) -> (Void) in
+            if let data = imageData
+            {
+                self?.thumbnail.image = UIImage(data: data)
+            }
+        })
     }
 }
 
@@ -90,32 +87,47 @@ private extension BookCell {
     func setupCell() {
         
         selectionStyle = .none
+        accessoryType = .disclosureIndicator
+        clipsToBounds = true
         
+        contentView.addSubview(thumbnail)
+        contentView.addSubview(title)
+        contentView.addSubview(detail)
+
         setupThumbnail()
         setupTitle()
         setupDetail()
     }
     
     func setupThumbnail() {
-        contentView.addSubview(thumbnail)
         thumbnail.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        thumbnail.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 4).isActive = true
-        thumbnail.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8).isActive = true
+        thumbnail.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: BookCellConstants.thumbnailLeftMargin).isActive = true
+        thumbnail.heightAnchor.constraint(equalToConstant: BookCellConstants.thumbnailSize).isActive = true
         thumbnail.widthAnchor.constraint(equalTo: thumbnail.heightAnchor, multiplier: 1).isActive = true
     }
     
     func setupTitle() {
-        contentView.addSubview(title)
-        title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-        title.leftAnchor.constraint(equalTo: thumbnail.rightAnchor, constant: 4).isActive = true
-        title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 4).isActive = true
+        title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: BookCellConstants.titleMarginSize).isActive = true
+        title.leftAnchor.constraint(equalTo: thumbnail.rightAnchor, constant: BookCellConstants.titleMarginSize).isActive = true
+        title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: BookCellConstants.titleMarginSize).isActive = true
+        title.bottomAnchor.constraint(equalTo: detail.topAnchor, constant: -BookCellConstants.titleMarginSize).isActive = true
+        title.setContentCompressionResistancePriority(1000, for: .vertical)
+        title.setContentHuggingPriority(1000, for: .vertical)
     }
     
     func setupDetail() {
-        contentView.addSubview(detail)
-        detail.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 8).isActive = true
-        detail.leftAnchor.constraint(equalTo: thumbnail.rightAnchor, constant: 4).isActive = true
-        detail.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 4).isActive = true
-        detail.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8).isActive = true
+        detail.leftAnchor.constraint(equalTo: thumbnail.rightAnchor, constant: BookCellConstants.detailMarginSize).isActive = true
+        detail.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: BookCellConstants.detailMarginSize).isActive = true
+        detail.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -BookCellConstants.detailBottomMarginSize).isActive = true
+        detail.setContentCompressionResistancePriority(1000, for: .vertical)
+        detail.setContentHuggingPriority(1000, for: .vertical)
     }
+}
+
+private struct BookCellConstants {
+    static let titleMarginSize: CGFloat = 4.0
+    static let detailMarginSize: CGFloat = 4.0
+    static let detailBottomMarginSize: CGFloat = 8.0
+    static let thumbnailLeftMargin: CGFloat = 4.0
+    static let thumbnailSize: CGFloat = 32.0
 }

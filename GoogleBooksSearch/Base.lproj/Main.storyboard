@@ -1,34 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2yP-LR-4aq">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="YtD-Ad-kPD">
-            <objects>
-                <navigationController id="2yP-LR-4aq" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yqJ-1H-wbU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="BDu-jt-F9I" kind="relationship" relationship="rootViewController" id="aVQ-ZX-jR2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9pM-c0-MJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-889" y="64"/>
-        </scene>
-        <!--Search-->
+        <!--Books List View Controller-->
         <scene sceneID="WT5-Sz-CBF">
             <objects>
-                <viewController id="BDu-jt-F9I" customClass="BooksListViewController" customModule="GoogleBooksSearch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BooksListViewController" id="BDu-jt-F9I" customClass="BooksListViewController" customModule="GoogleBooksSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EEO-cA-Gg4"/>
                         <viewControllerLayoutGuide type="bottom" id="NXc-eT-ctX"/>
@@ -38,14 +22,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="egk-f3-HqS">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7o5-jU-Y4H"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Qf-Uy-PfB">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Qf-Uy-PfB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -60,7 +44,7 @@
                             <constraint firstItem="6Qf-Uy-PfB" firstAttribute="top" secondItem="egk-f3-HqS" secondAttribute="bottom" id="pAL-6f-Jlv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="qy9-wI-cQO"/>
+                    <navigationItem key="navigationItem" id="qy9-wI-cQO"/>
                     <connections>
                         <outlet property="searchBar" destination="egk-f3-HqS" id="5Pa-Dh-kdi"/>
                         <outlet property="tableView" destination="6Qf-Uy-PfB" id="F0D-tl-gFO"/>
@@ -68,7 +52,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1te-dF-R9L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-143.19999999999999" y="62.518740629685162"/>
+            <point key="canvasLocation" x="-583" y="12"/>
+        </scene>
+        <!--Book Detail View Controller-->
+        <scene sceneID="vor-hO-FxO">
+            <objects>
+                <viewController storyboardIdentifier="BookDetailViewController" id="x2o-ID-29R" customClass="BookDetailViewController" customModule="GoogleBooksSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jeN-Nu-8ys"/>
+                        <viewControllerLayoutGuide type="bottom" id="IKY-yd-Oc4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NcO-wZ-Dp1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kiW-ib-Mpg" userLabel="Book Detail Table View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kiW-ib-Mpg" secondAttribute="trailing" id="8tA-oI-Ci4"/>
+                            <constraint firstItem="kiW-ib-Mpg" firstAttribute="leading" secondItem="NcO-wZ-Dp1" secondAttribute="leading" id="WqZ-fw-grf"/>
+                            <constraint firstItem="kiW-ib-Mpg" firstAttribute="top" secondItem="NcO-wZ-Dp1" secondAttribute="top" id="Y0G-h0-Bng"/>
+                            <constraint firstItem="IKY-yd-Oc4" firstAttribute="top" secondItem="kiW-ib-Mpg" secondAttribute="bottom" id="q2q-BC-OYD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="kiW-ib-Mpg" id="KRt-Hp-Yvz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A14-Sa-ELv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="184.80000000000001" y="10.344827586206897"/>
         </scene>
     </scenes>
 </document>

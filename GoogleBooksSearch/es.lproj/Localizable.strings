@@ -5,6 +5,11 @@
   Created by Rafael Gil Pastor on 7/3/17.
   Copyright © 2017 Rafael Gil. All rights reserved.
 */
-"GBS_AAPP_TITLE" = "Google Books Search";
+"GBS_APP_TITLE" = "Google Books Search";
 "GBS_OK" = "Aceptar";
 "GBS_NO_BOOKS_AVAILABLE" = "No hay libros disponibles para esta búsqueda. Por favor, busque con otros términos";
+"GBS_SEARCH_TITLE" = "Buscar";
+"GBS_DETAIL_TITLE" = "Detalle";
+"GBS_DETAIL_BACK" = "< Volver";
+"GBS_DETAIL_PAGES" = "páginas";
+"GBS_DETAIL_SINOPSIS" = "SINOPSIS";

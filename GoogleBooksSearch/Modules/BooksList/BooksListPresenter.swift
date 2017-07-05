@@ -7,44 +7,46 @@
 //
 
 import Foundation
+import UIKit
 
-typealias OnCompletionImageDownloadType = (Data?) -> (Void)
+public typealias OnCompletionImageDownloadType = (Data?) -> (Void)
 
-protocol BooksListPresenterProtocol: class
+public protocol BooksListPresenterProtocol: class
 {
+    var interactor: BooksListInteractorProtocol? { get set }
+    weak var router: BooksListRouterProtocol? { get set }
+    
     func viewDidLoad()
     func askForBooks(filter: String)
-    func askForBookImage(bookImageURL: String, onCompletion:OnCompletionImageDownloadType?)
-    func didSelectBook(bookIndex: Int)
+    func askForBookImage(book: BookViewEntity?, onCompletion:OnCompletionImageDownloadType?)
+    func didSelectBook(book: BookViewEntity)
 }
 
-class BooksListPresenter: BooksListPresenterProtocol {
-
-    private weak var ui:BooksListsUIProtocol?
+public class BooksListPresenter: BooksListPresenterProtocol {
     
-    private lazy var interactor: BooksListInteractor = {
-        return BooksListInteractor()
-    }()
+    fileprivate weak var ui:BooksListsUIProtocol?
+    public weak var router: BooksListRouterProtocol?
     
-    public init(withUI: BooksListsUIProtocol?)
+    public var interactor: BooksListInteractorProtocol?
+    
+    public init(withUI: BooksListsUIProtocol?, router: BooksListRouterProtocol?)
     {
-        //store the reference of ui
-        self.ui = withUI
+        ui = withUI
+        self.router = router
     }
 
     public func viewDidLoad() {
         
         //by default ask for all books
         askForBooks(filter: "")
-        
     }
 
     //ask for books matches the criteria received in filter parameter
     public func askForBooks(filter: String) {
         
-        self.ui?.showLoadingIndicator()
+        ui?.showLoadingIndicator()
         
-        self.interactor.searchBooks(filter: filter, onSuccess: {[weak self] (books) -> (Void) in
+        interactor?.searchBooks(filter: filter, onSuccess: {[weak self] (books) -> (Void) in
 
             DispatchQueue.main.async {
                 
@@ -52,7 +54,7 @@ class BooksListPresenter: BooksListPresenterProtocol {
                 
                 //map received books in a specific view model entities array and pass them to the ui for displaying
                 let viewBooks = books.map({ (bookEntity) -> BookViewEntity in
-                    return BookViewEntity(title: bookEntity.title, authors: bookEntity.authors.joined(separator: ", "), urlBookImage: bookEntity.imageURL)
+                    return BookViewEntity(id: bookEntity.id, title: bookEntity.title, authors: bookEntity.authors.joined(separator: ", "), urlBookImage: bookEntity.imageURL)
                 })
                 self?.ui?.showBooks(books: viewBooks)
             }
@@ -69,9 +71,9 @@ class BooksListPresenter: BooksListPresenterProtocol {
     }
 
     //ask for the related image of a book from its url
-    public func askForBookImage(bookImageURL: String, onCompletion:OnCompletionImageDownloadType?)
+    public func askForBookImage(book: BookViewEntity?, onCompletion:OnCompletionImageDownloadType?)
     {
-        self.interactor.downloadImageBook(urlImage: bookImageURL, onSuccess: { (imageData) -> (Void) in
+        interactor?.getImageBook(uriImage: book?.urlBookImage, onSuccess: { (imageData) -> (Void) in
             DispatchQueue.main.async {
                 onCompletion?(imageData)
             }
@@ -83,9 +85,10 @@ class BooksListPresenter: BooksListPresenterProtocol {
         }
     }
 
-    public func didSelectBook(bookIndex: Int) {
+    public func didSelectBook(book: BookViewEntity) {
         
-        //TODO: fetch detail book with received index from interactor
-        
+        if let view = ui as? UIViewController {
+            router?.showDetailBook(forBookId: book.id, fromView: view, output: nil)
+        }
     }
 }

@@ -8,35 +8,26 @@
 
 import UIKit
 
-public typealias ErrorMessageCompletion = () -> ()
-
 public protocol BooksListsViewProtocol:class {
     
-    func showMessageError(error: Error?, completion: ErrorMessageCompletion?)
+    var presenter: BooksListPresenterProtocol? { get set }
+
+    func showMessageError(error: Error?, completion: AlertMessageCompletion?)
     func showBooks(books: [BookViewEntity] )
 }
 
 public typealias BooksListsUIProtocol = BooksListsViewProtocol & TableLoadingIndicatorProtocol & AlertMessageProtocol
-
-public struct BookViewEntity
-{
-    let title: String!
-    let authors: String!
-    let urlBookImage : String?
-}
 
 public class BooksListViewController: UIViewController, BooksListsUIProtocol{
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak public var tableView: UITableView?
     
-    var mBooks: [BookViewEntity] = []
+    fileprivate var books: [BookViewEntity] = []
     
-    lazy var presenter: BooksListPresenter = { [unowned self] in
-        return BooksListPresenter(withUI: self)
-    }()
+    public var presenter: BooksListPresenterProtocol?
     
-    lazy public var loadingIndicator: UIRefreshControl = { [unowned self] in
+    public lazy var loadingIndicator: UIRefreshControl = { [unowned self] in
         // Initialize the refresh control.
         let control = UIRefreshControl(frame: .zero)
         control.backgroundColor = UIColor.purple
@@ -48,15 +39,14 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        //add refresh control to table (refresh control will be the loading indicator)
-        tableView?.refreshControl = loadingIndicator
-        tableView?.delegate = self
-        tableView?.dataSource = self
-        tableView?.estimatedRowHeight = UITableViewAutomaticDimension
-        tableView?.register(BookCell.classForCoder(), forCellReuseIdentifier: BookCell.identifier)
+        title = NSLocalizedString("GBS_SEARCH_TITLE", comment: "")
+        
+        setupTable(withLoadingIndicator: loadingIndicator)
+        
+        searchBar.delegate = self
         
         //call to presenter to give a chance when view did load
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
         
     }
     
@@ -66,15 +56,14 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
     }
 
     public func showBooks(books: [BookViewEntity]) {
-        mBooks = books
+        self.books = books
         tableView?.separatorStyle = .singleLine
         tableView?.reloadData()
     }
 
     public func refreshBooks()
     {
-        //TODO: get search criteria from Search Control
-        self.presenter.askForBooks(filter: "")
+        presenter?.askForBooks(filter: searchBar.text ?? "")
     }
     
     public func showEmptyMessage()
@@ -90,15 +79,30 @@ public class BooksListViewController: UIViewController, BooksListsUIProtocol{
         messageLabel.sizeToFit()
         tableView?.backgroundView = messageLabel;
         tableView?.separatorStyle = .none;
-        
     }
 }
 
+fileprivate extension BooksListViewController {
+    
+    func setupTable(withLoadingIndicator loadingIndicator: UIRefreshControl) {
+        
+        //add refresh control to table (refresh control will be the loading indicator)
+        tableView?.refreshControl = loadingIndicator
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 44.0
+        tableView?.register(BookCell.classForCoder(), forCellReuseIdentifier: BookCell.identifier)
+        tableView?.separatorStyle = .none
+        tableView?.allowsSelection = true
+        tableView?.allowsMultipleSelection = false
+    }
+}
 
 //MARK : Message Error Management
 extension BooksListViewController
 {
-    public func showMessageError(error: Error?, completion: ErrorMessageCompletion?)
+    public func showMessageError(error: Error?, completion: AlertMessageCompletion?)
     {
         showAlertMessage(fromView: self, error: error, completion: completion)
     }
@@ -109,7 +113,7 @@ extension BooksListViewController: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return mBooks.count
+        return books.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,7 +121,7 @@ extension BooksListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: BookCell.identifier, for: indexPath as IndexPath) as! BookCell
         
         //pass data to cell from the related book
-        cell.bindBook(book: mBooks[indexPath.row], presenter: presenter)
+        cell.bindBook(book: books[indexPath.row], presenter: presenter)
         
         return cell
     }
@@ -127,8 +131,29 @@ extension BooksListViewController: UITableViewDataSource {
 extension BooksListViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: call to presenter with index path of selected cell
+        
+        if indexPath.row >= 0 && indexPath.row < books.count {
+            presenter?.didSelectBook(book: books[indexPath.row])
+        }
     }
 }
 
+extension BooksListViewController: UISearchBarDelegate {
+    
+    public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
+        presenter?.askForBooks(filter: searchBar.text ?? "")
+    }
+    
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+}
 

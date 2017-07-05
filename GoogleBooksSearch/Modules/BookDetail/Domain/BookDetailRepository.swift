@@ -1,48 +1,45 @@
 //
-//  BookListRepository.swift
+//  BookDetailRepository.swift
 //  GoogleBooksSearch
 //
-//  Created by Rafael Gil Pastor on 19/6/17.
+//  Created by Gil Pastor, Rafael on 29.06.17.
 //  Copyright © 2017 Rafael Gil. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-public typealias OnBooksListResponseType = (Array<BookEntity>) -> (Void)
+public typealias OnBookDetailResponseType = (BookDetailEntity) -> (Void)
 
-public protocol BooksListRepositoryProtocol {
-
-    var dataSource: BooksListDataSourceProtocol? { get set }
+public protocol BookDetailRepositoryProtocol {
+    
     var imagesManager: BookImagesManagerProtocol? { get set }
     var networkingManager: NetworkingManagerProtocol? { get set }
-
-    func searchBooks(filter: String, onSuccess: OnBooksListResponseType?, onFailure: OnFailureResponseType? )
+    var dataSource: BookDetailDataSourceProtocol? { get set }
+    
+    func getBookDetail(onSuccess: OnBookDetailResponseType?, onFailure: OnFailureResponseType?)
     func getImageBook(uriImage: String, onSuccess: OnImageDataBookResponseType?, onFailure: OnFailureResponseType?)
 }
 
-public class BooksListRepository: BooksListRepositoryProtocol {
+public class BookDetailRepository: BookDetailRepositoryProtocol{
     
     public var networkingManager: NetworkingManagerProtocol?
     public var imagesManager: BookImagesManagerProtocol?
-    public var dataSource: BooksListDataSourceProtocol?
+    public var dataSource: BookDetailDataSourceProtocol?
     
-    //get data books with Goggle API
-    public func searchBooks(filter: String, onSuccess: OnBooksListResponseType?, onFailure: OnFailureResponseType? ) {
+    public func getBookDetail(onSuccess: OnBookDetailResponseType?, onFailure: OnFailureResponseType?) {
         
-        let encodedFilter = filter.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        let searchQuery = "\(BooksListRepositoryConstants.volumesResource)?q='\(encodedFilter)'"
+        let query = "\(BookDetailRepositoryConstants.volumesResource)/\(dataSource?.bookId ?? "")"
         //ask for books through Google API
-        networkingManager?.getDataFromResource(resource: searchQuery, completion: { [weak self] (booksData, urlResponse, error) in
+        networkingManager?.getDataFromResource(resource: query, completion: { [weak self] (booksData, urlResponse, error) in
             
             do {
-                guard error == nil, let books = try self?.dataSource?.parseSearchBooksResponse(fromData: booksData) else {
+                guard error == nil, let bookDetail = try self?.dataSource?.parseBookDetailResponse(fromData: booksData) else {
                     //we haven´t got the books from data
                     onFailure?( error != nil ? error! as NSError : ServerError.noDataError())
                     return
                 }
                 //return the received books as BookEntity objects array
-                onSuccess?(books)
+                onSuccess?(bookDetail)
             } catch let jsonError {
                 //throws the error catched from parsing
                 onFailure?(jsonError)
@@ -57,6 +54,7 @@ public class BooksListRepository: BooksListRepositoryProtocol {
     }
 }
 
-fileprivate struct BooksListRepositoryConstants {
+fileprivate struct BookDetailRepositoryConstants {
     static let volumesResource: String = "volumes"
 }
+

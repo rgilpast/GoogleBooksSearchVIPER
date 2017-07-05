@@ -20,7 +20,7 @@ public extension AlertMessageProtocol {
     public func showAlertMessage(fromView: UIViewController, error: Error?, completion: AlertMessageCompletion?)
     {
         //Show Message Error
-        let alert = UIAlertController(title: NSLocalizedString("GBS_AAPP_TITLE", comment: ""), message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString("GBS_APP_TITLE", comment: ""), message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("GBS_OK", comment: ""), style: UIAlertActionStyle.default, handler: nil))
         fromView.present(alert, animated: true, completion: completion)
     }

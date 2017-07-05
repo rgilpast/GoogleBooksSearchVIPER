@@ -16,15 +16,15 @@ public protocol TableLoadingIndicatorProtocol: LoadingIndicatorProtocol {
 }
 
 //MARK : Loading Indicator
-extension TableLoadingIndicatorProtocol
+public extension TableLoadingIndicatorProtocol
 {
-    public func showLoadingIndicator() {
+    func showLoadingIndicator() {
         //show loading indicator only if it isn´t displaying
         if !loadingIndicator.isRefreshing {
             loadingIndicator.beginRefreshing()
         }
     }
-    public func hideLoadingIndicator() {
+    func hideLoadingIndicator() {
         //hide loading indicator only if it is still displaying
         if loadingIndicator.isRefreshing {
             tableView?.reloadData()
