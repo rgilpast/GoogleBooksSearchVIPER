@@ -23,7 +23,7 @@ public struct BookDetailEntity {
     private let kPageCountFieldKey = "pageCount"
     private let kPublisherFieldKey = "publisher"
     private let kPublishedDateFieldKey = "publishedDate"
-    private let kDescriptionFieldKey = "publishedDate"
+    private let kDescriptionFieldKey = "description"
     
     //public properties
     public var title: String

@@ -44,6 +44,7 @@
 		0C9DC8AB1F062F4D00642D84 /* BookDetailMainInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DC8AA1F062F4D00642D84 /* BookDetailMainInfoCell.swift */; };
 		0C9DC8AD1F06368B00642D84 /* BookDetailAdditionalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9DC8AC1F06368B00642D84 /* BookDetailAdditionalInfoCell.swift */; };
 		0CCF43261F0BE100003183C4 /* UIView+LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCF43251F0BE100003183C4 /* UIView+LoadingIndicator.swift */; };
+		0CCF43291F0BE9D7003183C4 /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCF43281F0BE9D7003183C4 /* String+HTML.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		0C9DC8AA1F062F4D00642D84 /* BookDetailMainInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailMainInfoCell.swift; sourceTree = "<group>"; };
 		0C9DC8AC1F06368B00642D84 /* BookDetailAdditionalInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailAdditionalInfoCell.swift; sourceTree = "<group>"; };
 		0CCF43251F0BE100003183C4 /* UIView+LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LoadingIndicator.swift"; sourceTree = "<group>"; };
+		0CCF43281F0BE9D7003183C4 /* String+HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		059DD0AF1E97A1ED00EBB078 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0CCF43271F0BE955003183C4 /* Extensions */,
 				05E1FA991EF84D9300E95898 /* Domain */,
 				05B560D11E9973C8009DA57F /* Views */,
 				0C7121001F052648005A84AA /* RouterProtocol.swift */,
@@ -127,7 +130,6 @@
 				0551C5EF1EB11C0E00D2E947 /* LoadingIndicatorProtocol.swift */,
 				0551C5F11EB260DC00D2E947 /* TableLoadingIndicatorProtocol.swift */,
 				0C86C5941F0A1C7D00C04A04 /* ViewLoadingIndicatorProtocol.swift */,
-				0CCF43251F0BE100003183C4 /* UIView+LoadingIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +296,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0CCF43271F0BE955003183C4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0CCF43281F0BE9D7003183C4 /* String+HTML.swift */,
+				0CCF43251F0BE100003183C4 /* UIView+LoadingIndicator.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -370,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C7121121F054EF3005A84AA /* BookImagesManager.swift in Sources */,
+				0CCF43291F0BE9D7003183C4 /* String+HTML.swift in Sources */,
 				0C71210F1F054DA0005A84AA /* BookDetailInteractor.swift in Sources */,
 				05F56B141E6C1ECC0078C532 /* BooksListViewController.swift in Sources */,
 				05B560D31E997422009DA57F /* AlertMessageProtocol.swift in Sources */,
