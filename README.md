@@ -4,3 +4,4 @@ TODO List:
 - Enable to toggle between books´ list and grid display mode 
 - Enable show more results
 - Enable some funcionality to show how a viper module can return info to be fetched by other viper module
+- Write unit tests
