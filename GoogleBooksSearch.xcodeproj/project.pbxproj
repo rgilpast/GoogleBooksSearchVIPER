@@ -106,6 +106,7 @@
 		059DD0AF1E97A1ED00EBB078 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				059DD0B11E97A3C400EBB078 /* Globals.swift */,
 				0CCF43271F0BE955003183C4 /* Extensions */,
 				05E1FA991EF84D9300E95898 /* Domain */,
 				05B560D11E9973C8009DA57F /* Views */,
@@ -185,7 +186,6 @@
 		05F56B101E6C1ECC0078C532 /* GoogleBooksSearch */ = {
 			isa = PBXGroup;
 			children = (
-				059DD0B11E97A3C400EBB078 /* Globals.swift */,
 				05F56B111E6C1ECC0078C532 /* AppDelegate.swift */,
 				05F56B231E6C1EE20078C532 /* Modules */,
 				05F56B151E6C1ECC0078C532 /* Main.storyboard */,
